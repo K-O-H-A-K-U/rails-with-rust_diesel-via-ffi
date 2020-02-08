@@ -6,20 +6,30 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+2.7.0
 
-* System dependencies
-
-* Configuration
+* Cargo version
+1.41.1
 
 * Database creation
+postgresql used.
+create .env file at app root.
+set enviroment variables below
+  for diesel: DATABASE_URL like postgres::/{user}:{password}@{host}/{dbname} (for diesel)
+  for rails: DB_USERNAME, DB_PASSWORD
 
 * Database initialization
+users
+ id, name, created_at, updated_at
 
-* How to run the test suite
+somethings
+ id, user_id, int, str, date, nest(int), created_at, updated_at
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 # rails-with-rust_diesel-via-ffi
+* init
+cd ffi/diesel_ffi
+cargo build --release
+cd ../../
+rails db:migrate
+rails db:seed (in my enviroment, it takes an hour)
+rails s
