@@ -18,12 +18,6 @@ set enviroment variables below
   for diesel: DATABASE_URL like postgres::/{user}:{password}@{host}/{dbname}  
   for rails: DB_USERNAME, DB_PASSWORD  
 
-* Database initialization  
-users  
- id, name, created_at, updated_at  
-somethings  
- id, user_id, int, str, date, nest(int), created_at, updated_at  
-
 # rails-with-rust_diesel-via-ffi
 * init  
 cd ffi/diesel_ffi  
