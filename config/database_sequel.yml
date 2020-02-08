@@ -1,0 +1,7 @@
+development:
+  adapter: :postgres
+  user: kohaku
+  password: kohaku
+  host: 'localhost'
+  port: '5432'
+  database: 'testdb'
