@@ -15,7 +15,7 @@ Things you may want to cover:
 postgresql used.  
 create .env file at app root.  
 set enviroment variables below  
-  for diesel: DATABASE_URL like postgres::/{user}:{password}@{host}/{dbname} (for diesel)  
+  for diesel: DATABASE_URL like postgres::/{user}:{password}@{host}/{dbname}  
   for rails: DB_USERNAME, DB_PASSWORD  
 
 * Database initialization  
