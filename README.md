@@ -21,7 +21,6 @@ set enviroment variables below
 * Database initialization  
 users  
  id, name, created_at, updated_at  
-
 somethings  
  id, user_id, int, str, date, nest(int), created_at, updated_at  
 
