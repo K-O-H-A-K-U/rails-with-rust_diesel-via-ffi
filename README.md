@@ -8,7 +8,7 @@ Things you may want to cover:
 * Ruby version
 2.7.0
 
-*Rust version
+* Rust version
 1.42.0
 
 * Database creation  
@@ -20,11 +20,12 @@ set enviroment variables below
 
 # rails-with-rust_diesel-via-ffi
 * init  
+###
 cd ffi/diesel_ffi  
 cargo build --release  
 cd ../../  
 rails db:migrate  
 rails runner lib/rust_seed.rb (It takes four minites)  
 rails s  
-
-and access localhost:3000
+###
+(and access localhost:3000)
