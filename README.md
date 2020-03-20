@@ -24,5 +24,7 @@ cd ffi/diesel_ffi
 cargo build --release  
 cd ../../  
 rails db:migrate  
-rails db:seed (in my enviroment, it takes an hour)  
+rails runner lib/rust_seed.rb (It takes four minites)  
 rails s  
+
+and access localhost:3000

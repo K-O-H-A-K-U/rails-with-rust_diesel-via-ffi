@@ -77,3 +77,80 @@ struct SomethingWithUser {
     pub sentence: String,
     pub name: String,
 }
+
+
+extern crate fake;
+extern crate serde;
+extern crate serde_json;
+extern crate rand;
+
+use diesel::{Insertable};
+use chrono::{DateTime, Utc};
+use fake::{Fake, Faker};
+use fake::faker::name::raw::*;
+use fake::faker::lorem::raw::*;
+use fake::locales::*;
+use diesel::dsl::insert_into;
+use rand::{thread_rng, Rng};
+
+#[no_mangle]
+fn seed() {
+    let connection = establish_connection();
+    let mut rng = thread_rng();
+
+    use schema::users::dsl::*;
+    let mut new_users:  Vec::<UserCreate> = vec!();
+    for _n in 0..100 {
+        let fake_date = Faker.fake::<DateTime::<Utc>>();
+        let user = UserCreate {
+            name: Name(EN).fake::<String>(),
+            created_at: fake_date.clone(),
+            updated_at: fake_date.clone(),
+        };
+
+        new_users.push(user);
+    }
+    insert_into(users).values(&new_users).execute(&connection).unwrap();
+
+
+    use schema::somethings::dsl::*;
+    let mut new_somethings:  Vec::<SomethingCreate> = vec!();
+    for n in 1..5_000_001 {
+        let fake_date = Faker.fake::<DateTime::<Utc>>();
+        let something = SomethingCreate {
+            user_id: rng.gen_range(1, 100),
+            int: Faker.fake::<i32>(),
+            sentence: Sentence(EN, 5..8).fake(),
+            date: Faker.fake::<DateTime::<Utc>>(),
+            nest: Faker.fake::<i32>(),
+            created_at: fake_date.clone(),
+            updated_at: fake_date.clone(),
+        };
+        new_somethings.push(something);
+        if n % 5_000 == 0 {
+            insert_into(somethings).values(&new_somethings).execute(&connection).unwrap();
+            new_somethings.clear();
+            println!("{} finished", n);
+        }
+    }
+}
+
+#[derive(Insertable)]
+#[table_name="users"]
+struct UserCreate {
+    name: String,
+    created_at: DateTime<Utc>,
+    updated_at: DateTime<Utc>,
+}
+
+#[derive(Insertable)]
+#[table_name="somethings"]
+struct SomethingCreate {
+    user_id: i32,
+    int: i32,
+    sentence: String,
+    date: DateTime::<Utc>,
+    nest: i32,
+    created_at: DateTime::<Utc>,
+    updated_at: DateTime::<Utc>,
+}

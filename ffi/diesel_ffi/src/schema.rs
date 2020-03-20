@@ -1,25 +1,28 @@
 table! {
-    users (id) {
-        id -> Integer,
-        name -> Text,
-        created_at -> Nullable<Timestamptz>,
-        updated_at -> Nullable<Timestamptz>,
+    somethings (id) {
+        id -> Int4,
+        user_id -> Int4,
+        int -> Int4,
+        sentence -> Text,
+        date -> Nullable<Timestamptz>,
+        nest -> Int4,
+        created_at -> Timestamptz,
+        updated_at -> Timestamptz,
     }
 }
 
 table! {
-    somethings (id) {
-        id -> Integer,
-        user_id -> Integer,
-        int -> Integer,
-        #[sql_name = "str"]
-        sentence -> Text,
-        date -> Nullable<Timestamptz>,
-        nest -> Integer,
-        created_at -> Nullable<Timestamptz>,
-        updated_at -> Nullable<Timestamptz>,
+    users (id) {
+        id -> Int4,
+        name -> Varchar,
+        created_at -> Timestamptz,
+        updated_at -> Timestamptz,
     }
 }
 
 joinable!(somethings -> users (user_id));
-allow_tables_to_appear_in_same_query!(somethings, users);
+
+allow_tables_to_appear_in_same_query!(
+    somethings,
+    users,
+);

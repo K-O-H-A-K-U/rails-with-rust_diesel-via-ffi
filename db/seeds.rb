@@ -19,7 +19,7 @@ ActiveRecord::Base.transaction do
     somethings << {
       user_id: rand((1..User.all.size)),
       int: rand(10_000),
-      str: Faker::Lorem.word,
+      sentence: Faker::Lorem.word,
       date: Faker::Date.birthday(min_age: 18, max_age: 80),
       nest: 0,
       created_at: Time.zone.now,
