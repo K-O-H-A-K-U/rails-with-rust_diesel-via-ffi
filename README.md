@@ -8,8 +8,8 @@ Things you may want to cover:
 * Ruby version
 2.7.0
 
-* Cargo version
-1.41.1
+*Rust version
+1.42.0
 
 * Database creation  
 postgresql used.  
